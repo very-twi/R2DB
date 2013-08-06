@@ -11,46 +11,58 @@
  * the file LICENSE.md that was distributed with this source code.
  */
 
-class R2BD {
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config.php';
+require_once R2DB_ROOT_DIR . 'connection.php';
+
+class R2DB {
     
-    static $instance = null;
+    static $use_link = 'default';
+    protected static $instances = array();
     
-    static public function getInstance() {
+    static public function getInstance($link_name = 'default') {
+        if (empty(self::$instances[$link_name])) {
+            self::$instances[$link_name] = new Connection(R2DB_Config::DB_TYPE, $link_name);
+        }
+        
+        return self::$instances[$link_name];
+    }
+    
+    static public function Execute() {
         
     }
     
-    public function Execute() {
+    static public function useLink($link_name = 'default') {
+        R2DB::$use_link = $link_name;
+    }
+    
+    static public function GetOne() {
+        self::getInstance(self::$use_link)->GetOne();
+    }
+    
+    static public function GetAll() {
         
     }
     
-    public function GetOne() {
+    static public function Delete() {
         
     }
     
-    public function GetAll() {
+    static public function Insert() {
         
     }
     
-    public function Delete() {
-        
-    }
-    
-    public function Insert() {
-        
-    }
-    
-    public function Update() {
+    static public function Update() {
         
     }
     
     //
     //  Shortcut functions
     //
-    public function q() {
+    static public function q() {
         
     }
     
-    public function x() {
+    static public function x() {
         
     }
     
