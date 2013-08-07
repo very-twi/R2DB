@@ -1,8 +1,22 @@
 <?php
 
-define ('R2DB_ROOT_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 /**
- * Config class, used to contain necessary parameters
+ * config.php
+ * 
+ * Config class
+ * 
+ * Copyright 2013 Malishev Dmitry <dima.malishev@gmail.com>
+ * 
+ * For the full copyright and license information, please view
+ * the file LICENSE.md that was distributed with this source code.
+ */
+
+
+define ('R2DB_ROOT_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+
+/**
+ * Config class, used to contain necessary configuration parameters
+ *  
  */
 class R2DB_Config {
     

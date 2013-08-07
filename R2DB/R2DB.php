@@ -13,6 +13,7 @@
 
 require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config.php';
 require_once R2DB_ROOT_DIR . 'connection.php';
+require_once R2DB_ROOT_DIR . 'connectors/abstract.connector.php';
 
 class R2DB {
     
@@ -27,20 +28,20 @@ class R2DB {
         return self::$instances[$link_name];
     }
     
-    static public function Execute() {
-        
+    static public function Execute($query, $arguments = array()) {
+        return self::getInstance(self::$use_link)->Execute($query, $arguments);
     }
     
     static public function useLink($link_name = 'default') {
         R2DB::$use_link = $link_name;
     }
     
-    static public function GetOne() {
-        self::getInstance(self::$use_link)->GetOne();
+    static public function GetOne($query, $arguments = array()) {
+        return self::getInstance(self::$use_link)->GetOne($query, $arguments);
     }
     
-    static public function GetAll() {
-        
+    static public function GetAll($query, $arguments = array()) {
+        return self::getInstance(self::$use_link)->GetOne($query, $arguments);
     }
     
     static public function Delete() {
@@ -58,12 +59,12 @@ class R2DB {
     //
     //  Shortcut functions
     //
-    static public function q() {
-        
+    static public function q($query, $arguments = array()) {
+        return self::getInstance(self::$use_link)->GetAll($query, $arguments);
     }
     
-    static public function x() {
-        
+    static public function x($query, $arguments = array()) {
+        return self::getInstance(self::$use_link)->Execute($query, $arguments);
     }
     
     

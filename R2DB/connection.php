@@ -1,10 +1,23 @@
 <?php
 
+/**
+ * connection.php
+ * 
+ * Conection class
+ * 
+ * Copyright 2013 Malishev Dmitry <dima.malishev@gmail.com>
+ * 
+ * For the full copyright and license information, please view
+ * the file LICENSE.md that was distributed with this source code.
+ */
+
+
 class Connection {
     
+    private $conn = null;
+    
     public function __construct($db_type = 'mysql', $link_name = 'default') {
-        return $this->getConnector($db_type, $link_name);
-        
+        $this->conn = $this->getConnector($db_type, $link_name);
     }
     
     public function getConnector($db_type, $link_name) {
@@ -39,6 +52,12 @@ class Connection {
         }
         
         return $details;
+    }
+    
+    public function __call($method_name, $arguments) {
+        if (method_exists($this->conn, $method_name)) {
+            return call_user_method_array($method_name, $this->conn, $arguments);
+        }
     }
     
     
