@@ -6,3 +6,8 @@ Simple, yet powerfull database tool.
 Supported databases:
 
 - MySql
+- 
+
+
+
+
